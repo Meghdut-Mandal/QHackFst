@@ -94,6 +94,7 @@
         android:hint="eg:headache"
         android:inputType="textPersonName"
         android:padding="6dp"
+        android:transitionName="searcht"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
