@@ -79,23 +79,9 @@ class SearchActivity : AppCompatActivity() {
     {
         list.add(SearchElement("fever"))
         list.add(SearchElement("headache"))
-        list.add(SearchElement("fever"))
-        list.add(SearchElement("fever"))
-
-        list.add(SearchElement("fever"))
-        list.add(SearchElement("fever"))
-        list.add(SearchElement("fever"))
-        list.add(SearchElement("fever"))
-
-        list.add(SearchElement("fever"))
-        list.add(SearchElement("fever"))
-        list.add(SearchElement("fever"))
-        list.add(SearchElement("fever"))
-
-        list.add(SearchElement("fever"))
-        list.add(SearchElement("fever"))
-        list.add(SearchElement("fever"))
-        list.add(SearchElement("fever"))
+        for (x in 0..14) {
+            list.add(SearchElement("fever"))
+        }
        // adapter1.notifyDataSetChanged()
 
     }
