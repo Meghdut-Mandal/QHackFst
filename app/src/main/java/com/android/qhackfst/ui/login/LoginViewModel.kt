@@ -1,4 +1,4 @@
-package com.meghdut.covid.ui.login
+package com.android.qhackfst.ui.login
 
 import android.app.Application
 import android.util.Patterns
@@ -8,8 +8,6 @@ import androidx.lifecycle.MutableLiveData
 import com.android.qhackfst.R
 import com.android.qhackfst.data.User
 import com.android.qhackfst.data.UserRepository
-import com.android.qhackfst.ui.login.LoginFormState
-import com.android.qhackfst.ui.login.LoginResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import org.koin.core.KoinComponent

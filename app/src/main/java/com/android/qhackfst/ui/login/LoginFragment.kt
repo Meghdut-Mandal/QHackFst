@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.qhackfst.R
 import com.android.qhackfst.ui.MainActivity
 import com.android.qhackfst.util.navController
-import com.meghdut.covid.ui.login.LoginViewModel
 //import com.meghdut.covid.util.navController
 import kotlinx.android.synthetic.main.fragment_login.*
 

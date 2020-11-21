@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.meghdut.covid.ui.login.LoginFragment"
+        android:name="com.android.qhackfst.ui.login.LoginFragment"
         tools:layout="@layout/fragment_login"
         android:label="LoginFragment" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.meghdut.covid.ui.signup.SignUpFragment"
+        android:name="com.android.qhackfst.ui.signup.SignUpFragment"
         tools:layout="@layout/fragment_sign_up"
         android:label="SignUpFragment" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.meghdut.covid.ui.registration.RegistrationFragment"
+        android:name="com.android.qhackfst.ui.signup.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" />
 
