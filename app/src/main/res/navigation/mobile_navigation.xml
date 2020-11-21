@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_adult">
+
+    <fragment
+        android:id="@+id/navigation_adult"
+        android:name="com.android.qhackfst.ui.home.adult.AdultFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_adult" />
+
+    <fragment
+        android:id="@+id/navigation_child"
+        android:name="com.android.qhackfst.ui.home.child.ChildFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_child" >
+        <action
+            android:id="@+id/action_navigation_child_to_doctoChat"
+            app:destination="@id/doctoChat" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_oldie"
+        android:name="com.android.qhackfst.ui.home.oldie.OldieFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_oldie" />
+    <fragment
+        android:id="@+id/doctoChat"
+        android:name="com.android.qhackfst.ui.home.child.DoctoChat"
+        android:label="fragment_docto_chat"
+        tools:layout="@layout/fragment_docto_chat" />
+</navigation>
