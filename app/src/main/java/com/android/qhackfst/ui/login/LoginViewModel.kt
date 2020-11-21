@@ -10,11 +10,14 @@ import com.android.qhackfst.data.User
 import com.android.qhackfst.data.UserRepository
 import com.android.qhackfst.ui.login.LoginFormState
 import com.android.qhackfst.ui.login.LoginResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import org.koin.core.KoinComponent
 import org.koin.java.KoinJavaComponent
 
 
 class LoginViewModel(application: Application) : AndroidViewModel(application), KoinComponent {
+    private val mAuth by lazy { FirebaseAuth.getInstance() }
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -32,52 +35,60 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
 
     fun login(email: String, password: String) {
 
-        if (email.contains("meghdut")){
-            _loginResult.postValue(LoginResult("LoggedIn $email"))
-            userDataBase.getUser {
-                userLiveData.postValue(it)
+        mAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = mAuth.currentUser!!
+
+                    val userEmail = user.email
+                    val username = user.displayName
+                    _loginResult.postValue(LoginResult("LoggedIn $userEmail"))
+                    userDataBase.getUser {
+                        userLiveData.postValue(it)
+                    }
+                } else {
+
+                    _loginResult.postValue(
+                        LoginResult(
+                            error = task.exception?.localizedMessage ?: " Unidentified Error"
+                        )
+                    )
+                }
             }
-        }else{
-            _loginResult.postValue(
-                LoginResult(
-                    error = "Wrong password"
-                )
-            )
-        }
+
 
 
     }
 
 
-    private fun saveNewUser(email: String,name:String){
-        val user=User("${Math.random()}",name,email)
+    private fun saveNewUser(firebaseUser: FirebaseUser){
+        val user=User(firebaseUser.uid,firebaseUser.displayName?:"",firebaseUser.email?:"")
         userDataBase.setUser(user){
             userLiveData.postValue(user)
         }
     }
 
+
     fun signUp(email: String, password: String) {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val user = mAuth.currentUser!!
+                val username = user.displayName
+                _loginResult.postValue(LoginResult("LoggedIn $username"))
 
-        _loginResult.postValue(LoginResult("LoggedIn $email"))
-        saveNewUser(email,"Meghdut Mandal")
+                saveNewUser(user)
+            } else {
+
+                _loginResult.postValue(
+                    LoginResult(
+                        error = task.exception?.localizedMessage ?: " Unidentified Error"
+                    )
+                )
+            }
+
+        }
 
 
-//        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-//            if (task.isSuccessful) {
-//                val user = mAuth.currentUser!!
-//                val username = user.displayName
-//
-//            } else {
-//
-//                _loginResult.postValue(
-//                    LoginResult(
-//                        error = task.exception.localizedMessage ?: " Unidentified Error"
-//                    )
-//                )
-//            }
-//
-//        }
-//
     }
 
     fun loginDataChanged(username: String, password: String) {

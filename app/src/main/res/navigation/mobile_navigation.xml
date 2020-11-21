@@ -9,7 +9,14 @@
         android:id="@+id/navigation_adult"
         android:name="com.android.qhackfst.ui.home.adult.AdultFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_adult" />
+        tools:layout="@layout/fragment_adult" >
+        <action
+            android:id="@+id/action_navigation_adult_to_resultPreviewFragment"
+            app:destination="@id/resultPreviewFragment" />
+        <action
+            android:id="@+id/action_navigation_adult_to_resultsFragment"
+            app:destination="@id/resultsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_child"
@@ -31,4 +38,16 @@
         android:name="com.android.qhackfst.ui.home.child.DoctoChat"
         android:label="fragment_docto_chat"
         tools:layout="@layout/fragment_docto_chat" />
+    <fragment
+        android:id="@+id/resultPreviewFragment"
+        android:name="com.android.qhackfst.ui.home.adult.ResultPreviewFragment"
+        android:label="ResultPreviewFragment" />
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.android.qhackfst.ui.home.adult.ResultsFragment"
+        android:label="ResultsFragment" >
+        <action
+            android:id="@+id/action_resultsFragment_to_resultPreviewFragment"
+            app:destination="@id/resultPreviewFragment" />
+    </fragment>
 </navigation>

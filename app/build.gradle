@@ -79,4 +79,15 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
+
+    implementation 'com.google.firebase:firebase-database-ktx:19.5.1'
+    implementation 'com.google.firebase:firebase-database:19.5.1'
+    implementation 'com.google.firebase:firebase-firestore:22.0.0'
+
+    implementation 'com.google.firebase:firebase-auth:20.0.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:22.0.0'
+    implementation 'com.google.firebase:firebase-storage-ktx:19.2.0'
+    implementation group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.9.0'
+
+
 }
