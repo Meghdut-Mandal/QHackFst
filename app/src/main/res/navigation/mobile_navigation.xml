@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_navigation_oldie_to_visionAI"
             app:destination="@id/visionAI" />
+        <action
+            android:id="@+id/action_navigation_oldie_to_perkinsonFragment"
+            app:destination="@id/perkinsonFragment" />
     </fragment>
     <fragment
         android:id="@+id/doctoChat"
@@ -69,4 +72,8 @@
         android:name="com.android.qhackfst.ui.home.oldie.VisionAI"
         android:label="fragment_vision_a_i"
         tools:layout="@layout/fragment_vision_a_i" />
+    <fragment
+        android:id="@+id/perkinsonFragment"
+        android:name="com.android.qhackfst.ui.home.oldie.PerkinsonFragment"
+        android:label="PerkinsonFragment" />
 </navigation>

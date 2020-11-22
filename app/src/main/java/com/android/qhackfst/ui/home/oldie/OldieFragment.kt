@@ -34,5 +34,13 @@ class OldieFragment : Fragment() {
         vision_ai.setOnClickListener {
             navController.navigate(R.id.action_navigation_oldie_to_visionAI)
         }
+        wave_test.setOnClickListener {
+            oldieViewModel.perkinsonType.postValue("wave")
+            navController.navigate(R.id.action_navigation_oldie_to_perkinsonFragment)
+        }
+        spiral_test.setOnClickListener {
+            oldieViewModel.perkinsonType.postValue("spiral")
+            navController.navigate(R.id.action_navigation_oldie_to_perkinsonFragment)
+        }
     }
 }

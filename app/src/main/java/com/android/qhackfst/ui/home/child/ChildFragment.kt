@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.android.qhackfst.R
+import com.android.qhackfst.util.navController
 
 class ChildFragment : Fragment() {
 
@@ -20,10 +21,10 @@ class ChildFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View? = inflater.inflate(R.layout.fragment_child, container, false)
 
-        val root = inflater.inflate(R.layout.fragment_child, container, false)
-
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController.navigate(R.id.action_navigation_child_to_doctoChat)
     }
 }

@@ -13,31 +13,40 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.qhackfst.R
 import com.bumptech.glide.Glide
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
-import kotlinx.android.synthetic.main.fragment_vision_a_i.*
+import kotlinx.android.synthetic.main.fragment_perkinson.*
 import java.io.File
 
-
-class VisionAI : Fragment() {
+class PerkinsonFragment : Fragment() {
     private val oldieViewModel by lazy {
         ViewModelProvider(requireActivity()).get(
             OldieViewModel::class.java
         )
     }
 
+    var typeDisease: String = "spiral"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_vision_a_i, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_perkinson, container, false)
     }
 
+    val message =
+        "Draw <type> on a paper and upload the image.The tool predict you have parkinson's or not."
     lateinit var imageUri: Uri
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        oldieViewModel.visionAIMessage.observe(viewLifecycleOwner, {
-            result_field.text = it
+        oldieViewModel.perkinsonType.observe(viewLifecycleOwner, {
+            typeDisease = it
+            description.text = message.replace("<type>", typeDisease)
         })
-        image_preview.setOnClickListener {
+        oldieViewModel.perkinsonMessage.observe(viewLifecycleOwner, {
+            result_field_parkinson.text = it
+        })
+        image_preview_parkinson.setOnClickListener {
             runWithPermissions(Manifest.permission.CAMERA) {
                 val imagePath = File(requireContext().filesDir, "external_files")
                 imagePath.mkdirs()
@@ -51,6 +60,8 @@ class VisionAI : Fragment() {
                 getcontent.launch(imageUri)
             }
         }
+
+
     }
 
     private val getcontent = registerForActivityResult(ActivityResultContracts.TakePicture()) {
@@ -60,10 +71,8 @@ class VisionAI : Fragment() {
     }
 
     private fun process() {
-        println("com.android.qhackfst.ui.home.oldie>>VisionAI>process  $imageUri")
-        Glide.with(requireContext()).load(imageUri).into(image_preview)
-        oldieViewModel.visionAI(imageUri)
+        Glide.with(requireContext()).load(imageUri).into(image_preview_parkinson)
+        oldieViewModel.parkinson(typeDisease, imageUri)
     }
-
 
 }
