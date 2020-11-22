@@ -28,7 +28,19 @@ class AdultFragment : Fragment() {
 
     private val recentRecordAdapter by lazy { MedicalRecordAdapter() }
 
-    fun askForName(afterInput: (String) -> Unit) {
+
+    private fun showUploadFragment() {
+        val progressFragment = UploadProgressFragment()
+        progressFragment.showNow(childFragmentManager, "")
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = inflater.inflate(R.layout.fragment_adult, container, false)
+
+
+    private fun askForName(afterInput: (String) -> Unit) {
         MaterialDialog(requireContext()).show {
             title(text = "Name of the Specimen")
             input(prefill = "Untitled Specimen ") { dialog: MaterialDialog, text: CharSequence ->
@@ -37,36 +49,25 @@ class AdultFragment : Fragment() {
             positiveButton(text = "Done")
         }
     }
-    private fun showUploadFragment() {
-        val progressFragment = UploadProgressFragment()
-        progressFragment.showNow(childFragmentManager, "")
-    }
 
 
     private var isShown = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_adult, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
+        dashboardViewModel
         upload_x_ray.setOnClickListener {
             askForName {
                 dashboardViewModel.chooseFile(it)
             }
         }
 
-        dashboardViewModel.userData.observe(viewLifecycleOwner, Observer {
-            if (it!=null) {
-                name_field.text == "Dr. " + it.name
-            }
+        dashboardViewModel.userData.observe(viewLifecycleOwner, {
+            name_field.text == "Dr. " + it.name
         })
         recent_records.layoutManager = LinearLayoutManager(requireContext())
         recent_records.adapter = recentRecordAdapter
-        dashboardViewModel.recentRecordLiveData.observe(viewLifecycleOwner, Observer {
+        dashboardViewModel.recentRecordLiveData.observe(viewLifecycleOwner, {
             if (it != null) {
                 recentRecordAdapter.submitList(it)
                 recentRecordAdapter.onClickListener =
@@ -115,6 +116,10 @@ class AdultFragment : Fragment() {
                 }
             }
         })
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
 }

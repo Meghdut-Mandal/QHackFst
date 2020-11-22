@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_sign_up.*
 class SignUpFragment : Fragment() {
 
     private val loginViewModel by lazy {
-        ViewModelProvider(this).get(LoginViewModel::class.java)
+        ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
     }
     private val username: EditText
         get() = signup_username

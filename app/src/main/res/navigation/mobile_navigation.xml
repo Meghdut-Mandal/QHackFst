@@ -26,13 +26,20 @@
         <action
             android:id="@+id/action_navigation_child_to_doctoChat"
             app:destination="@id/doctoChat" />
+        <action
+            android:id="@+id/action_navigation_child_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_oldie"
         android:name="com.android.qhackfst.ui.home.oldie.OldieFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_oldie" />
+        tools:layout="@layout/fragment_oldie" >
+        <action
+            android:id="@+id/action_navigation_oldie_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
     <fragment
         android:id="@+id/doctoChat"
         android:name="com.android.qhackfst.ui.home.child.DoctoChat"
@@ -50,4 +57,8 @@
             android:id="@+id/action_resultsFragment_to_resultPreviewFragment"
             app:destination="@id/resultPreviewFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.android.qhackfst.ui.home.oldie.CameraFragment"
+        android:label="CameraFragment" />
 </navigation>

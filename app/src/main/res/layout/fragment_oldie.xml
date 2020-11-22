@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25"
+        app:layout_constraintGuide_percent="0.3"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -178,7 +178,7 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:text="Old Age Care"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -186,8 +186,8 @@
 
     <ImageView
         android:id="@+id/imageView10"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/textView12"
@@ -198,7 +198,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.48"
+        app:layout_constraintGuide_percent="0.57"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -229,12 +229,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/heart_monitor"
         android:layout_width="100dp"
         android:layout_height="110dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toTopOf="@+id/guideline14" >
+        app:layout_constraintTop_toTopOf="@+id/guideline14">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

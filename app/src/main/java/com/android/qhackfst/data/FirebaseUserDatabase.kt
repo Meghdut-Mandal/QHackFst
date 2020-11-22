@@ -29,7 +29,7 @@ class FirebaseUserRepository(private val firebaseAuth: FirebaseAuth) : UserRepos
         get() = firebaseAuth.currentUser!!
 
     override var exceptionHandler: (Exception) -> Unit = {
-
+        println("com.android.qhackfst.data>>FirebaseUserRepository> ${it.localizedMessage}  ")
     }
 
     override fun getUserID(fund: (String) -> Unit) {
@@ -37,6 +37,7 @@ class FirebaseUserRepository(private val firebaseAuth: FirebaseAuth) : UserRepos
     }
 
     override fun getUser(func: (User?) -> Unit) {
+        firebaseAuth.currentUser
         userData.document(firebaseUser.uid).get().addOnSuccessListener {
             val map = it.get("user", User::class.java)
             func(map)

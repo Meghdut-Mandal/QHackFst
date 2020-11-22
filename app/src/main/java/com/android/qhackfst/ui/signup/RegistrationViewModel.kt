@@ -16,6 +16,11 @@ class RegistrationViewModel(val app: Application) : AndroidViewModel(app), KoinC
     val userLiveData: MutableLiveData<User> = MutableLiveData()
     val formState: MutableLiveData<RegistrationState> = MutableLiveData()
 
+    init {
+        load()
+    }
+
+
     fun load() {
         userRepository.getUser {
             userLiveData.postValue(it)
@@ -24,12 +29,13 @@ class RegistrationViewModel(val app: Application) : AndroidViewModel(app), KoinC
     }
 
     fun register(userName: String, age: Int, gender: String) {
+
         val userID = userLiveData.value!!.id
         val userDetails = UserDetails(userID)
         userDetails.name = userName
         userDetails.age = age.toString()
         userDetails.gender = gender
-        userRepository.setUserDetails(userDetails){
+        userRepository.setUserDetails(userDetails) {
             formState.postValue(Finished)
         }
     }

@@ -19,10 +19,10 @@ import java.math.BigInteger
 import java.util.*
 import kotlin.random.Random
 
+val diseases = arrayListOf("Covid-19","SARS","ARDS","Streptococcus","Pneumonia")
 
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
 
-    val diseases = arrayListOf("Covid-19","SARS","ARDS","Streptococcus","Pneumonia")
 
     val uploadStatus: MutableLiveData<UploadState> = MutableLiveData()
     private val storageRef = Firebase.storage.reference
@@ -107,8 +107,8 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
         uploadStatus.postValue(fileChosen)
         userDataBase.getUserID { id ->
             try {
-//                transferFile(id, file, fileChosen)
-                dummyUpload(fileChosen)
+                transferFile(id, file, fileChosen)
+//                dummyUpload(fileChosen)
             } catch (e: Exception) {
                 uploadStatus.postValue(UploadState.UploadingError(fileChosen, e))
             }

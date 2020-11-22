@@ -10,15 +10,18 @@ import com.android.qhackfst.R
 
 class ChildFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: ChildViewModel
+    private val dashboardViewModel: ChildViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(
+            ChildViewModel::class.java
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(ChildViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_child, container, false)
 
         return root
