@@ -25,6 +25,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/vision_ai"
         android:layout_width="100dp"
         android:layout_height="110dp"
         android:layout_marginStart="16dp"

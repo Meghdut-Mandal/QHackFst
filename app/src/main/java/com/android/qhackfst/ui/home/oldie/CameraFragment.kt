@@ -58,7 +58,7 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         textureView.surfaceTextureListener = textureListener
-        oldieViewModel.message.observe(viewLifecycleOwner, {
+        oldieViewModel.heartRateMessage.observe(viewLifecycleOwner, {
             bottomText.text = it
         })
 
@@ -87,11 +87,11 @@ class CameraFragment : Fragment() {
             val status = (mNumBeats * 100.0) / 15.0
             when {
                 status < 1.0 -> {
-                    oldieViewModel.message.postValue("Place your finger lightly on the camera lens. Try not to move it.")
+                    oldieViewModel.heartRateMessage.postValue("Place your finger lightly on the camera lens. Try not to move it.")
                 }
                 status in 1.0..99.0 -> {
                     val format = String.format("%2.2f", status)
-                    oldieViewModel.message.postValue("Hold on.Don't move your finger. $format % detected.")
+                    oldieViewModel.heartRateMessage.postValue("Hold on.Don't move your finger. $format % detected.")
                 }
                 else -> {
 
@@ -182,7 +182,7 @@ class CameraFragment : Fragment() {
         med = timedist[timedist.size / 2].toInt()
         hrtratebpm = 60000 / med
         Log.d("YAYYY", "YAYYYYYYYYYAAAAAAAA=" + hrtratebpm)
-        oldieViewModel.message.postValue("Heart Rate = $hrtratebpm BPM")
+        oldieViewModel.heartRateMessage.postValue("Heart Rate = $hrtratebpm BPM")
         done_button.visibility = View.VISIBLE
         done_button.setOnClickListener {
             navController.navigateUp()

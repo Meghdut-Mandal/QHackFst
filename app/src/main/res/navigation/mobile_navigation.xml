@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_navigation_oldie_to_cameraFragment"
             app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_navigation_oldie_to_visionAI"
+            app:destination="@id/visionAI" />
     </fragment>
     <fragment
         android:id="@+id/doctoChat"
@@ -61,4 +64,9 @@
         android:id="@+id/cameraFragment"
         android:name="com.android.qhackfst.ui.home.oldie.CameraFragment"
         android:label="CameraFragment" />
+    <fragment
+        android:id="@+id/visionAI"
+        android:name="com.android.qhackfst.ui.home.oldie.VisionAI"
+        android:label="fragment_vision_a_i"
+        tools:layout="@layout/fragment_vision_a_i" />
 </navigation>

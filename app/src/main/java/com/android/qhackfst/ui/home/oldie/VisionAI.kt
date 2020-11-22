@@ -1,32 +1,27 @@
 package com.android.qhackfst.ui.home.oldie
 
-import android.app.Activity.RESULT_OK
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.graphics.Bitmap
+import android.Manifest
+import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.android.qhackfst.R
+import com.bumptech.glide.Glide
+import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import kotlinx.android.synthetic.main.fragment_vision_a_i.*
+import java.io.File
 
 
 class VisionAI : Fragment() {
-
-
-    val REQUEST_IMAGE_CAPTURE = 1
-
-    private fun dispatchTakePictureIntent() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        try {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-        } catch (e: ActivityNotFoundException) {
-            // display error state to the user
-        }
+    private val oldieViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(
+            OldieViewModel::class.java
+        )
     }
 
     override fun onCreateView(
@@ -36,18 +31,39 @@ class VisionAI : Fragment() {
         return inflater.inflate(R.layout.fragment_vision_a_i, container, false)
     }
 
+    lateinit var imageUri: Uri
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        oldieViewModel.visionAIMessage.observe(viewLifecycleOwner, {
+            result_field.text = it
+        })
         image_preview.setOnClickListener {
-            dispatchTakePictureIntent()
+            runWithPermissions(Manifest.permission.CAMERA) {
+                val imagePath = File(requireContext().filesDir, "external_files")
+                imagePath.mkdirs()
+                val newFile = File(imagePath, "test${System.currentTimeMillis()}.jpg")
+                newFile.delete()
+                imageUri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "com.android.qhackfst.fileprovider",
+                    newFile
+                )
+                getcontent.launch(imageUri)
+            }
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            image_preview.setImageBitmap(imageBitmap)
+    private val getcontent = registerForActivityResult(ActivityResultContracts.TakePicture()) {
+        if (it) {
+            process()
         }
     }
+
+    private fun process() {
+        println("com.android.qhackfst.ui.home.oldie>>VisionAI>process  $imageUri")
+        Glide.with(requireContext()).load(imageUri).into(image_preview)
+        oldieViewModel.uploadImage2(imageUri)
+    }
+
+
 }

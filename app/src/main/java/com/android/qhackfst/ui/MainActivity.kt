@@ -19,7 +19,6 @@ private const val RC_UPLOAD_FILE = 102
 class MainActivity : AppCompatActivity() {
 
 
-
     private val dashboardViewModel by lazy {
         ViewModelProvider(this).get(DashboardViewModel::class.java)
     }
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
-        if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK && requestCode==RC_UPLOAD_FILE) {
             val pair =
                 tempFile(intent!!.data!!) ?: return
             dashboardViewModel.upload(pair)

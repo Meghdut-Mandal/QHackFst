@@ -31,5 +31,8 @@ class OldieFragment : Fragment() {
         heart_monitor.setOnClickListener {
             navController.navigate(R.id.action_navigation_oldie_to_cameraFragment)
         }
+        vision_ai.setOnClickListener {
+            navController.navigate(R.id.action_navigation_oldie_to_visionAI)
+        }
     }
 }

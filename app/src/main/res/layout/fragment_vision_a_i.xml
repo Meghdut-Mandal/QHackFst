@@ -30,9 +30,10 @@
     <TextView
         android:id="@+id/textView21"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="66dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:paddingEnd="50dp"
         android:text="This tool will help people with defective vision  to acess objects with the help of Computer vision"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline21"
@@ -44,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="376dp"
+        app:layout_constraintGuide_begin="373dp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline

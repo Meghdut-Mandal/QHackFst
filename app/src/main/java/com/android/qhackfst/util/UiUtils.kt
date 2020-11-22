@@ -4,6 +4,7 @@ import android.content.ContentResolver
 import android.content.Context
 import android.database.Cursor
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
 import android.provider.OpenableColumns
@@ -42,6 +43,24 @@ fun Context.tempFile(fileUri: Uri): File? {
 //    to hashingInputStream.hash()
 }
 
+fun Context.createTempImage(fileUri: Uri): File?{
+    val parcelFileDescriptor = contentResolver.openFileDescriptor(fileUri, "r", null) ?: return null
+    val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+
+    val file = File(cacheDir, contentResolver.getFileName(fileUri))
+    val options = BitmapFactory.Options()
+    options.inPreferredConfig = Bitmap.Config.ARGB_8888
+    val bitmap = BitmapFactory.decodeFileDescriptor(parcelFileDescriptor.fileDescriptor)
+    val sbitmap = Bitmap.createScaledBitmap(bitmap, 300, 400, true)
+
+    FileOutputStream(file).use { fileOutputStream: FileOutputStream ->
+        sbitmap.compress(Bitmap.CompressFormat.JPEG,50,fileOutputStream)
+    }
+    return file
+}
+
+
+
 
 fun ContentResolver.getFileName(fileUri: Uri): String {
 
@@ -56,7 +75,6 @@ fun ContentResolver.getFileName(fileUri: Uri): String {
 
     return name
 }
-
 
 
 private const val BITMAP_SCALE = 0.4f
@@ -276,6 +294,6 @@ fun Bitmap.fastBlur(): Bitmap? {
     return bitmap
 }
 
-val diseases = arrayListOf("Covid-19","SARS","ARDS","Streptococcus","Pneumonia")
+val diseases = arrayListOf("Covid-19", "SARS", "ARDS", "Streptococcus", "Pneumonia")
 
 val gson: Gson = Gson()
