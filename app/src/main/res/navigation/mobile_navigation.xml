@@ -50,7 +50,11 @@
         android:id="@+id/doctoChat"
         android:name="com.android.qhackfst.ui.home.child.DoctoChat"
         android:label="fragment_docto_chat"
-        tools:layout="@layout/fragment_docto_chat" />
+        tools:layout="@layout/fragment_docto_chat" >
+        <action
+            android:id="@+id/action_doctoChat_to_checkupCompleteFragment"
+            app:destination="@id/checkupCompleteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/resultPreviewFragment"
         android:name="com.android.qhackfst.ui.home.adult.ResultPreviewFragment"
@@ -76,4 +80,9 @@
         android:id="@+id/perkinsonFragment"
         android:name="com.android.qhackfst.ui.home.oldie.PerkinsonFragment"
         android:label="PerkinsonFragment" />
+    <fragment
+        android:id="@+id/checkupCompleteFragment"
+        android:name="com.android.qhackfst.ui.home.child.CheckupCompleteFragment"
+        android:label="fragment_checkup_complete"
+        tools:layout="@layout/fragment_checkup_complete" />
 </navigation>

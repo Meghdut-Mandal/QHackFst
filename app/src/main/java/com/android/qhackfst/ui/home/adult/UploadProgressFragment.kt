@@ -26,7 +26,7 @@ class UploadProgressFragment : BottomSheetDialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        dashboardViewModel.uploadStatus.observe(viewLifecycleOwner, Observer {
+        dashboardViewModel.uploadStatus.observe(viewLifecycleOwner, {
             when (it) {
                 is UploadState.Uploading -> {
                     progressBar.isIndeterminate = !(it.progress in 1..100)

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.android.qhackfst.R
 import com.android.qhackfst.util.navController
+import kotlinx.android.synthetic.main.fragment_child.*
 
 class ChildFragment : Fragment() {
 
@@ -25,6 +26,11 @@ class ChildFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController.navigate(R.id.action_navigation_child_to_doctoChat)
+        docto_chat.setOnClickListener {
+            navController.navigate(R.id.action_navigation_child_to_doctoChat)
+        }
+        heart_mon.setOnClickListener {
+            navController.navigate(R.id.action_navigation_child_to_cameraFragment)
+        }
     }
 }
