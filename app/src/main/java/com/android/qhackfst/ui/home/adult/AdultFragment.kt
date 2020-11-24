@@ -84,6 +84,7 @@ class AdultFragment : Fragment() {
                             extras
                         )
                     }
+                recent_records.smoothScrollToPosition(0)
             }
         })
         all_results_textview.setOnClickListener {
@@ -117,6 +118,7 @@ class AdultFragment : Fragment() {
             }
         })
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

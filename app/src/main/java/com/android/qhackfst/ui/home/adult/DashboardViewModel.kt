@@ -19,7 +19,7 @@ import java.math.BigInteger
 import java.util.*
 import kotlin.random.Random
 
-val diseases = arrayListOf("Covid-19","SARS","ARDS","Streptococcus","Pneumonia")
+val diseases = arrayListOf("Covid-19", "SARS", "ARDS", "Streptococcus", "Pneumonia")
 
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -154,7 +154,19 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
         }.addOnFailureListener {
             uploadStatus.postValue(UploadState.UploadingError(fileChosen, it))
         }.addOnSuccessListener {
-            uploadStatus.postValue(UploadState.UploadComplete)
+            it.metadata?.reference?.downloadUrl?.addOnCompleteListener {result->
+                fileChosen.name
+                val medicalRecord = MedicalRecord(
+                    System.currentTimeMillis(),
+                    fileChosen.name,
+                    System.currentTimeMillis(),
+                    result.result.toString(),
+                    diseaseStatus = hashMapOf("Covid-19" to "true")
+                )
+                addRecord(medicalRecord)
+                uploadStatus.postValue(UploadState.UploadComplete)
+            }
+
         }
     }
 
